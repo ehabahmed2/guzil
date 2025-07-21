@@ -1,0 +1,99 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="مستحضرات تجميل عالية الجودة ومنتجات العناية بالبشرة للفتيات الحديثات - اكتشفي الجمال الحقيقي">
+    <meta name="keywords" content="مستحضرات تجميل, عناية بالبشرة, مكياج, جمال, عطور, صالون تجميل">
+    
+    <!-- Favicon -->
+    <!-- Favicon -->
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/950/950878.png" type="image/png">
+
+    <!-- Font Awesome from CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    
+    <title>Guzel  | {% block title %}{% endblock %}</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="{% url "home" %}" class="logo">
+                <img src="{% static "images/logo.jpg" %}" alt="Guzel">
+            </a>
+            
+            <div class="menu-toggle" id="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="{% url "home" %}">الرئيسية</a></li>
+                <li><a href="{% url "about" %}">من نحن</a></li>
+                <li><a href="{% url "products" %}">المنتجات</a></li>
+                <li><a href="{% url "contact" %}">اتصل بنا</a></li>
+            </ul>
+        </div>
+    </nav>
+    <!--Messages-->
+    {% if messages %}
+    <div class="messages-container">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- Content Block -->
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="{% static 'images/logo.jpg' %}" alt="Guzel">
+                    <p>جمالكِ هو انعكاس لعنايتكِ بنفسكِ</p>
+                </div>
+                
+                <div class="social-links">
+                    <a href="https://www.facebook.com/people/Guzel-products/100064064894239/" target="_blank" aria-label="فيسبوك">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://instagram.com" target="_blank" aria-label="إنستجرام">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://tiktok.com" target="_blank" aria-label="تيك توك">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>جميع الحقوق محفوظة &copy; Guzel {% now 'Y' %}</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="{% static 'js/scripts.js' %}"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

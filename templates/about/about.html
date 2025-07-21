@@ -1,0 +1,489 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Guzel | من نحن{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* About Page Styles */
+     
+    .about-hero {
+        background: 
+        linear-gradient(rgba(255, 255, 255, 0.8), rgba(245, 245, 245, 1)),
+        url('{% static "images/hero-bg.jfif" %}');
+        background-size: cover;
+        background-position: center;
+        padding: 6rem 0 4rem;
+        text-align: center;
+        position: relative;
+    }
+    
+    .about-hero::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        background: url('{% static "images/floral-pattern-light.png" %}') repeat;
+        opacity: 0.15;
+        z-index: 0;
+    }
+    
+    .about-hero-content {
+        position: relative;
+        z-index: 1;
+    }
+    
+    .about-hero h1 {
+        font-size: 3.2rem;
+        color: var(--dark);
+        margin-bottom: 1.5rem;
+    }
+    
+    .about-hero p {
+        font-size: 1.3rem;
+        color: var(--text-light);
+        max-width: 700px;
+        margin: 0 auto;
+        line-height: 1.8;
+    }
+    
+    .gold-divider {
+        width: 100px;
+        height: 4px;
+        background: linear-gradient(to left, #d4af37, #f9e076);
+        margin: 2rem auto;
+        border-radius: 2px;
+    }
+    
+    .about-section {
+        padding: 5rem 0;
+    }
+    
+    .section-header {
+        text-align: center;
+        margin-bottom: 3.5rem;
+    }
+    
+    .section-header h2 {
+        font-size: 2.6rem;
+        color: var(--dark);
+        position: relative;
+        display: inline-block;
+        padding-bottom: 15px;
+    }
+    
+    .section-header h2::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        right: 50%;
+        transform: translateX(50%);
+        width: 80px;
+        height: 3px;
+        background: linear-gradient(to left, var(--accent), var(--dark));
+    }
+    
+    .section-header p {
+        color: var(--text-light);
+        max-width: 700px;
+        margin: 1.5rem auto 0;
+        font-size: 1.1rem;
+        line-height: 1.8;
+    }
+    
+    .content-row {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 50px;
+        margin-bottom: 4rem;
+    }
+    
+    .content-col {
+        flex: 1;
+        min-width: 300px;
+    }
+    
+    .content-col img {
+        width: 100%;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .content-text {
+        color: var(--text);
+        line-height: 1.9;
+        font-size: 1.1rem;
+    }
+    
+    .content-text p {
+        margin-bottom: 1.5rem;
+    }
+    
+    .highlight {
+        background: linear-gradient(transparent 60%, rgba(212, 106, 146, 0.15));
+        padding: 0 5px;
+    }
+    
+    .mission-vision {
+        background: linear-gradient(to right, #fff9fb, #fdeff5);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .mission-vision::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        background: url('{% static "images/gold-pattern.png" %}') repeat;
+        opacity: 0.05;
+        z-index: 0;
+    }
+    
+    .mv-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 40px;
+        position: relative;
+        z-index: 1;
+    }
+    
+    .mv-card {
+        background: white;
+        border-radius: 15px;
+        padding: 40px 30px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        text-align: center;
+        transition: transform 0.4s ease;
+    }
+    
+    .mv-card:hover {
+        transform: translateY(-10px);
+    }
+    
+    .mv-icon {
+        width: 80px;
+        height: 80px;
+        background: linear-gradient(135deg, var(--accent), var(--dark));
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 25px;
+    }
+    
+    .mv-icon i {
+        font-size: 2.5rem;
+        color: white;
+    }
+    
+    .mv-card h3 {
+        font-size: 1.8rem;
+        color: var(--dark);
+        margin-bottom: 20px;
+    }
+    
+    .mv-card p {
+        color: var(--text-light);
+        line-height: 1.9;
+    }
+    
+    .values-section {
+        padding: 5rem 0;
+    }
+    
+    .values-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+        margin-top: 3rem;
+    }
+    
+    .value-card {
+        text-align: center;
+        padding: 30px 25px;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+    }
+    
+    .value-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .value-icon {
+        width: 70px;
+        height: 70px;
+        background: linear-gradient(135deg, #ff9eb5, #d46a92);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 25px;
+    }
+    
+    .value-icon i {
+        font-size: 2rem;
+        color: white;
+    }
+    
+    .value-card h4 {
+        font-size: 1.4rem;
+        color: var(--dark);
+        margin-bottom: 15px;
+    }
+    
+    .value-card p {
+        color: var(--text-light);
+        line-height: 1.8;
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 992px) {
+        .about-hero h1 {
+            font-size: 2.8rem;
+        }
+        
+        .section-header h2 {
+            font-size: 2.3rem;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .about-hero {
+            padding: 4rem 0 3rem;
+        }
+        
+        .about-hero h1 {
+            font-size: 2.4rem;
+        }
+        
+        .about-hero p {
+            font-size: 1.1rem;
+        }
+        
+        .content-row {
+            flex-direction: column;
+        }
+        
+        .content-col:first-child {
+            order: 2;
+        }
+        
+        .content-col:last-child {
+            order: 1;
+        }
+        
+        .section-header h2 {
+            font-size: 2rem;
+        }
+    }
+    
+    @media (max-width: 576px) {
+        .about-hero h1 {
+            font-size: 2rem;
+        }
+        
+        .section-header h2 {
+            font-size: 1.8rem;
+        }
+        
+        .mv-card {
+            padding: 30px 20px;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- About Hero Section -->
+<section class="about-hero">
+    <div class="container">
+        <div class="about-hero-content">
+            <h1>قصة جمال بدأت بحلم</h1>
+            <div class="gold-divider"></div>
+            <p>قصة Guzel هي قصة شغف بالجمال الطبيعي وتمكين المرأة من خلال منتجات طبيعية فاخرة تعزز ثقتها بنفسها وتكشف عن جمالها الحقيقي</p>
+        </div>
+    </div>
+</section>
+
+<!-- Founder Section -->
+<section class="about-section">
+    <div class="container">
+        <div class="section-header">
+            <h2>الدكتورة يسرى شكري</h2>
+            <p>خبيرة التجميل الطبيعية ومؤسسة علامة Guzel</p>
+        </div>
+        
+        <div class="content-row">
+            <div class="content-col">
+                <img src="{% static 'images/dr-yosra.jpg' %}" alt="الدكتورة يسرى شكري">
+            </div>
+            
+            <div class="content-col">
+                <div class="content-text">
+                    <p>الدكتورة <span class="highlight">يسرى شكري</span> هي خبيرة تجميل طبيعية معروفة على مستوى العالم العربي، حاصلة على دكتوراه في الكيمياء التجميلية من جامعة القاهرة وعلى العديد من الشهادات الدولية في صناعة مستحضرات التجميل الطبيعية والعضوية.</p>
+                    
+                    <p>بدأت رحلتها في عالم الجمال منذ أكثر من 15 عاماً، حيث عملت مع أكبر العلامات التجارية العالمية قبل أن تؤسس علامتها الخاصة Guzel عام 2018. شغفها الرئيسي كان تطوير منتجات تجمع بين <span class="highlight">الفعالية العلمية</span> و<span class="highlight">الطبيعة الخالصة</span> بعيداً عن المواد الكيميائية الضارة.</p>
+                    
+                    <p>تؤمن الدكتورة يسرى بأن جمال المرأة هو انعكاس لصحة بشرتها وثقتها بنفسها، وليس مجرد مظهر خارجي. من خلال Guzel، تهدف إلى توفير منتجات فاخرة تعتني بالبشرة وتكشف عن جمالها الطبيعي من الداخل إلى الخارج.</p>
+                    
+                    <p>بالإضافة إلى عملها في تطوير المنتجات، تقدم الدكتورة يسرى استشارات مجانية عبر منصات التواصل الاجتماعي وتدير عيادة متخصصة في القاهرة لعلاج مشكلات البشرة باستخدام منتجات طبيعية.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Mission & Vision Section -->
+<section class="about-section mission-vision">
+    <div class="container">
+        <div class="section-header">
+            <h2>رسالتنا ورؤيتنا</h2>
+            <p>أسسنا Guzel لتحقيق رؤية واضحة ورسالة ملهمة</p>
+        </div>
+        
+        <div class="mv-container">
+            <div class="mv-card">
+                <div class="mv-icon">
+                    <i class="fas fa-bullseye"></i>
+                </div>
+                <h3>رسالتنا</h3>
+                <p>تقديم منتجات تجميل طبيعية فاخرة وفعالة تعزز جمال المرأة الطبيعي وتدعم صحتها وثقتها بنفسها. نحن نلتزم باستخدام مكونات طبيعية مستدامة وتقنيات تصنيع دقيقة تحافظ على نقاء وفعالية كل منتج.</p>
+            </div>
+            
+            <div class="mv-card">
+                <div class="mv-icon">
+                    <i class="fas fa-eye"></i>
+                </div>
+                <h3>رؤيتنا</h3>
+                <p>أن تصبح Guzel الوجهة الأولى للمرأة العربية الباحثة عن الجودة والنقاء في عالم مستحضرات التجميل. نسعى لتحقيق ثورة في مفهوم الجمال الطبيعي وتوسيع انتشارنا لخدمة المزيد من النساء في جميع أنحاء العالم العربي.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Brand Story Section -->
+<section class="about-section">
+    <div class="container">
+        <div class="section-header">
+            <h2>قصة علامتنا Guzel</h2>
+            <p>رحلة بدأت بحلم وأصبحت واقعاً يلمسه الآلاف</p>
+        </div>
+        
+        <div class="content-row">
+            <div class="content-col">
+                <div class="content-text">
+                    <p>بدأت قصة Guzel في عام 2018 عندما قررت الدكتورة يسرى شكري تحويل شغفها بالجمال الطبيعي إلى مشروع يخدم المرأة العربية. بدأت التجربة في <span class="highlight">مختبر صغير</span> بمنزلها بالقاهرة، حيث كانت تطور تركيباتها الأولى باستخدام أعشاب طبية وزهور طازجة وزيوت عضوية.</p>
+                    
+                    <p>أول منتج أطلقتته Guzel كان <span class="highlight">سيروم فيتامين سي الطبيعي</span>، الذي حصل على إشادات كبيرة من عملاءها الأوائل. هذا التشجيع دفع الدكتورة يسرى لتطوير خط كامل من المنتجات الطبيعية التي تعتني بجميع أنواع البشرة.</p>
+                    
+                    <p>ما يميز منتجات Guzel هو:</p>
+                    <ul style="list-style: none; padding-right: 20px; margin-bottom: 1.5rem;">
+                        <li style="margin-bottom: 10px; position: relative; padding-right: 25px;">
+                            <i class="fas fa-check-circle" style="color: var(--accent); position: absolute; right: 0; top: 5px;"></i>
+                            <span>مكونات طبيعية بنسبة 100% من مصادر مستدامة</span>
+                        </li>
+                        <li style="margin-bottom: 10px; position: relative; padding-right: 25px;">
+                            <i class="fas fa-check-circle" style="color: var(--accent); position: absolute; right: 0; top: 5px;"></i>
+                            <span>تصنيع يدوي دقيق تحت إشراف الدكتورة يسرى شخصياً</span>
+                        </li>
+                        <li style="margin-bottom: 10px; position: relative; padding-right: 25px;">
+                            <i class="fas fa-check-circle" style="color: var(--accent); position: absolute; right: 0; top: 5px;"></i>
+                            <span>خالية من البارابين والكبريتات والمواد الكيميائية الضارة</span>
+                        </li>
+                        <li style="margin-bottom: 10px; position: relative; padding-right: 25px;">
+                            <i class="fas fa-check-circle" style="color: var(--accent); position: absolute; right: 0; top: 5px;"></i>
+                            <span>اختبارات فعالية مكثفة قبل الإطلاق</span>
+                        </li>
+                    </ul>
+                    
+                    <p>اليوم، أصبحت Guzel علامة معروفة في عالم التجميل الطبيعي، تخدم آلاف النساء في جميع أنحاء الوطن العربي. ما زلنا نتمسك بقيمنا الأساسية: الجودة، النقاء، والتميز في كل ما نقدمه لعملائنا.</p>
+                </div>
+            </div>
+            
+            <div class="content-col">
+                <img src="{% static 'images/brand-story.jpg' %}" alt="قصة علامة Guzel">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Values Section -->
+<section class="about-section values-section">
+    <div class="container">
+        <div class="section-header">
+            <h2>قيمنا الأساسية</h2>
+            <p>الأساس الذي تقوم عليه كل منتجاتنا وخدماتنا</p>
+        </div>
+        
+        <div class="values-grid">
+            <div class="value-card">
+                <div class="value-icon">
+                    <i class="fas fa-leaf"></i>
+                </div>
+                <h4>الطبيعية</h4>
+                <p>نلتزم باستخدام مكونات طبيعية وعضوية بنسبة 100%، خالية من المواد الكيميائية الضارة أو الاختبارات على الحيوانات.</p>
+            </div>
+            
+            <div class="value-card">
+                <div class="value-icon">
+                    <i class="fas fa-star"></i>
+                </div>
+                <h4>الجودة</h4>
+                <p>كل منتج يمر بمراحل تصنيع دقيقة واختبارات صارمة لضمان أعلى مستويات الجودة والفعالية.</p>
+            </div>
+            
+            <div class="value-card">
+                <div class="value-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <h4>الاهتمام</h4>
+                <p>نصغي لاحتياجات بشرتكِ ونقدم منتجات تلبي متطلباتكِ الخاصة، مع دعم متواصل من فريق الخبراء.</p>
+            </div>
+            
+            <div class="value-card">
+                <div class="value-icon">
+                    <i class="fas fa-seedling"></i>
+                </div>
+                <h4>الاستدامة</h4>
+                <p>نسعى لتحقيق التوازن بين الجمال والبيئة، باستخدام مواد قابلة لإعادة التدوير وتغليف صديق للبيئة.</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Simple animation for value cards when they come into view
+    document.addEventListener('DOMContentLoaded', function() {
+        const valueCards = document.querySelectorAll('.value-card');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = "1";
+                    entry.target.style.transform = "translateY(0)";
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+        
+        valueCards.forEach(card => {
+            card.style.opacity = "0";
+            card.style.transform = "translateY(20px)";
+            card.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+            observer.observe(card);
+        });
+    });
+</script>
+{% endblock %}
