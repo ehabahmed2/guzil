@@ -4,5 +4,5 @@ __pycache__/
 venv/
 .env
 .vscode/
-media
+*media
 todo.txt
